@@ -1,13 +1,14 @@
-#!/usr/bin/python
+#Import all important libraries
 import sys
 import pickle
 from Lexer import Lexer
 from Parser import Parser
 from DFA import DFA
 from PythonCodeGenerator import PythonCodeGenerator
-from pprint import pprint
 
 if __name__ == "__main__":
+    
+    #Get the data filename
     if len(sys.argv) > 1:
         try:
             scanner = Lexer(sys.argv[1])
@@ -30,8 +31,11 @@ INPUT ERROR: Unable to open File! >>>
             scanner.keywords, 
             scanner.ignore
         )
-        pickle.dump(dfa, open('./temporal.p', 'wb'))
+        
+        #Save the dfa in a binay file
+        pickle.dump(dfa, open('./temporal', 'wb'))
 
+        #Generate Code in ./generated_lexer.py
         PythonCodeGenerator('./generated_lexer.py', scanner.tokens, dfa).generate()
 
         print("""

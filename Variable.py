@@ -43,7 +43,9 @@ class Variable:
     def generateNode(self, type):
         Node = self.current_character
         self.getNext()
+        #Throught the character
         while self.current_character != None:
+            #add the current character
             Node += self.current_character
             self.getNext()
             if self.current_character == type:
@@ -51,8 +53,10 @@ class Variable:
                 self.getNext()
                 break
         if getType(Node, self.identities):
+            #get an return the time and identities
             return getType(Node, self.identities)
 
+    #Get all the characters and get the current word
     def generateWord(self):
         word = self.current_character
         self.getNext()
@@ -66,6 +70,7 @@ class Variable:
             self.getNext()
         if 'CHR(' in word:
             toReturn = None
+            #If we find parenthesis
             if (
                 word.find('(') != -1 and 
                 word.find(')') != -1 and 
@@ -74,6 +79,7 @@ class Variable:
                 ):
                 toReturn = word[word.find('(')+1:word.find(')')]
             if toReturn != None and toReturn.isdigit():
+                #Add the character
                 toReturn = chr(int(toReturn))
             toReturn = Node(NodeType["CHAR"], set(toReturn))
         else:

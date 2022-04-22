@@ -42,19 +42,24 @@ class Lexer:
 
         return self._characters
 
+    #This file is useful to get the data from the file
     def read(self, filepath):
         lines = []
         for line in open(filepath, 'r').readlines():
             if line == '\n':
                 pass
             else:
+                #Add all the characters to a single string, 
+                #Ignoring uneuseful characeters
                 lines.append(
                     [character for character in 
                      line.strip().strip('\r\t\n').split(' ') 
                      if character != '' or character]
                 )
+        #Update lines
         self.lines =  lines
 
+    #Get the next line
     def getNextLine(self):
         if(self.current_index  < len(self.lines)):
             self.current_line = self.lines[self.current_index]
@@ -62,13 +67,19 @@ class Lexer:
         else:
             self.current_line = None
 
+    #Get all tokens from the lines
     def processLines(self):
+        #While there is a new line
         while self.current_line != None:
+            #If compiler is in the line
             if 'COMPILER' in self.current_line:
+                #We have the compiler name
                 self.compiler_name = self.current_line[self.current_line.index(
                     'COMPILER')+1]
                 self.getNextLine()
+            #If ignore is in the line
             elif 'IGNORE' in self.current_line:
+                #We generate a set of variables that we will ignore
                 self.ignore = VariableGenerator(
                     Variable(' '.join(self.current_line).split('IGNORE', 1)[1].replace('.', ''), self.characters).Set(),
                     self.characters

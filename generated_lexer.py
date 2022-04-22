@@ -14,7 +14,7 @@ def read(file_dir):
             characters.append(char)
     return characters
 
-my_dfa = pickle.load(open("./temporal.p", "rb"))
+my_dfa = pickle.load(open("./temporal", "rb"))
 
 file_name = None
 if len(sys.argv) > 1: 
@@ -46,7 +46,7 @@ for index, character in enumerate(characters):
             print("Token:",value, "		Type:", node_type)
         value = character
         if not character in my_dfa.transitions[alphanumeric[0]]:
-            #print("Token:",value, "		Type: None")
+            print("Token:",value, "		Type: None")
             value = ""
             current_state = alphanumeric[0]
             continue
