@@ -79,10 +79,10 @@ for index, character in enumerate(characters):
 
         self.file.write('''
         if value:
-            print("Token:",value, "\t\tType:", node_type)
+            print(f"Token:",repr(value), "Type:", node_type)
         value = character
         if not character in my_dfa.transitions[alphanumeric[0]]:
-            print("Token:",value, "\t\tType: None")
+            print(f"Token:",repr(value), "Type: None")
             value = ""
             current_state = alphanumeric[0]
             continue

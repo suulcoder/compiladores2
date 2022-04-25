@@ -38,15 +38,11 @@ for index, character in enumerate(characters):
                 in my_dfa.accepting_dictionary[current_state], my_dfa.nodes))[0]
         node_type = token.value.split("#-")[1]
                         
-        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
-            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
-            node_type = keyword.value.value
-                                
         if value:
-            print("Token:",value, "		Type:", node_type)
+            print(f"Token:",repr(value), "Type:", node_type)
         value = character
         if not character in my_dfa.transitions[alphanumeric[0]]:
-            print("Token:",value, "		Type: None")
+            print(f"Token:",repr(value), "Type: None")
             value = ""
             current_state = alphanumeric[0]
             continue
