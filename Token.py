@@ -123,7 +123,7 @@ class ExecuteToken:
                 raise Exception('invalid char in ' + node)
         elif type == '\"':
             toReturn = []
-            for char in Node:
+            for char in node:
                 toReturn.append(Node(NodeType["STRING"], set(char)))
                 toReturn.append(Node(NodeType["CONCATENATION"], '.'))
             if self.last_character not in self.closing_symbols:

@@ -14,7 +14,7 @@ class DFA:
         self.alphabet = alphabet
         self.states = []
         self.transitions = {}
-        self.to_ignore = to_ignore
+        self.to_ignore = to_ignore if to_ignore!=None else []
         self.tree = tree
         self.augmented_states = None
         self.iteration = 1
@@ -32,7 +32,11 @@ class DFA:
         for node in self.nodes:
             node.getFollowPos(self.nodes)
         initial_state = self.nodes[-1].firstpos
-        self.nodes = list(filter(lambda x: x._id, self.nodes))
+        _nodes = list(filter(lambda x: x._id, self.nodes))
+        self.nodes = []
+        for n in _nodes:
+            if n.value!=None:
+                self.nodes.append(n)
         self.augmented_states = set(
             [node._id for node in list(
             filter(lambda node: '#-' in node.value, self.nodes))])

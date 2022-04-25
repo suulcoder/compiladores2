@@ -10,8 +10,10 @@ if __name__ == "__main__":
     
     #Get the data filename
     if len(sys.argv) > 1:
+        
+        scanner = Lexer(sys.argv[1])
         try:
-            scanner = Lexer(sys.argv[1])
+            x= 0
         except Exception as e:
             print(e)
             print("""

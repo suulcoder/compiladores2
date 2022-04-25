@@ -22,7 +22,7 @@ class Leaf(object):
     """
     new_id = itertools.count()
         
-    def __init__(self, _id, firstpos=None, lastpos=None, nullable=False, value=None, left=None, right=None):
+    def __init__(self, _id, firstpos=None, lastpos=None, nullable=False, value='', left=None, right=None):
         super(Leaf, self).__init__()
         self._id = _id
         self.firstpos = firstpos
@@ -84,5 +84,4 @@ class Leaf(object):
         elif self.value == 'KLEENE':
             for lastpos_node in self.lastpos:
                 list(filter(lambda x: x._id == lastpos_node, nodes))[0].followpos += self.firstpos
-            
         

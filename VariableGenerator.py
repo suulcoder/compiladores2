@@ -13,6 +13,8 @@ class VariableGenerator:
         self.getNext()
 
     def getNext(self):
+        if type(self.word) != list:
+            return
         if(self.current_word_index < len(self.word)):
             self.previous_node = self.current_node
             self.current_node = self.word[self.current_word_index]
@@ -42,11 +44,12 @@ class VariableGenerator:
 
     def getVariable(self, op):
         self.getNext()
-        curr_word = self.current_node.value
-        if op == 'UNION':
-            self.value = self.value.union(curr_word)
-        elif op == 'DIFFERENCE':
-            self.value = self.value.difference(curr_word)
+        if(self.current_node):
+            curr_word = self.current_node.value
+            if op == 'UNION':
+                self.value = self.value.union(curr_word)
+            elif op == 'DIFFERENCE':
+                self.value = self.value.difference(curr_word)
 
     def getRange(self):
         previous_character = self.previous_node

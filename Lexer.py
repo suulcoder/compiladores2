@@ -79,11 +79,11 @@ class Lexer:
                 self.getNextLine()
             #If ignore is in the line
             elif 'IGNORE' in self.current_line:
-                #We generate a set of variables that we will ignore
+                #We generate a set of variables that we will ignore and delete
                 self.ignore = VariableGenerator(
-                    Variable(' '.join(self.current_line).split('IGNORE', 1)[1].replace('.', ''), self.characters).Set(),
+                    Variable(' '.join(self.current_line).split('IGNORE', 1)[1].replace('.', ''), self.characters).parse_variable(),
                     self.characters
-                    ).GenerateSet()
+                    ).generateVariable()
                 self.getNextLine()
             elif 'KEYWORDS' in self.current_line:
                 self.getNextLine()
