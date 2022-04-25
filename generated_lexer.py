@@ -38,6 +38,22 @@ for index, character in enumerate(characters):
                 in my_dfa.accepting_dictionary[current_state], my_dfa.nodes))[0]
         node_type = token.value.split("#-")[1]
                         
+        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
+            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
+            node_type = keyword.value.value
+                                
+        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
+            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
+            node_type = keyword.value.value
+                                
+        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
+            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
+            node_type = keyword.value.value
+                                
+        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
+            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
+            node_type = keyword.value.value
+                                
         if value:
             print(f"Token:",repr(value), "Type:", node_type)
         value = character
