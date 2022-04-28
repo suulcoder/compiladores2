@@ -31,6 +31,9 @@ for index, character in enumerate(characters):
         value += character
         current_state = my_dfa.transitions[current_state][character]
         continue
+    else:
+        if(character not in my_dfa.to_ignore):
+            value += character
     if current_state in my_dfa.final_states:
         token = list(
             filter(
@@ -42,23 +45,11 @@ for index, character in enumerate(characters):
             keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
             node_type = keyword.value.value
                                 
-        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
-            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
-            node_type = keyword.value.value
-                                
-        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
-            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
-            node_type = keyword.value.value
-                                
-        if node_type == "{token.ident}" and value in my_dfa.keywords_values:
-            keyword = list(filter(lambda x: x.value.value == value, my_dfa.keywords))[0]
-            node_type = keyword.value.value
-                                
         if value:
-            print(f"Token:",repr(value), "Type:", node_type)
+            print(f"Token:",repr(value[:-1]), "Type:", node_type)
         value = character
         if not character in my_dfa.transitions[alphanumeric[0]]:
-            print(f"Token:",repr(value), "Type: None")
+            print(f"Token:",repr(value[:-1]), "Type: None")
             value = ""
             current_state = alphanumeric[0]
             continue

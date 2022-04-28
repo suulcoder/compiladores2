@@ -26,12 +26,15 @@ INPUT ERROR: Unable to open File! >>>
             
         parser = Parser(scanner)
         
+        if(scanner.ignore==None):
+            scanner.ignore = []
+        
         # Direct DFA
         dfa = DFA(
             parser.parse(parser.get_unique_expression()), 
             scanner.getCharacters(), 
             scanner.keywords, 
-            scanner.ignore
+            scanner.ignore + ['\n']
         )
         
         #Save the dfa in a binay file
